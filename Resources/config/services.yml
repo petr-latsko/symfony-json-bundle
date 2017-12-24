@@ -1,0 +1,17 @@
+services:
+
+    json.transport.curl:
+        public: false
+        class: Curl\Curl
+
+    petr_latsko_json.client.curl_client:
+        public: false
+        class: PetrLatsko\JsonBundle\Client\CurlClient
+        calls:
+            - method: setTransport
+              arguments:
+                  - '@json.transport.curl'
+
+    json.curl_client:
+        public: true
+        alias: petr_latsko_json.client.curl_client
